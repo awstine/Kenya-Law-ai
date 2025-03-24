@@ -3,7 +3,6 @@
 
 Kenya Law Chatbot is an AI-powered legal chatbot designed to provide accessible, instant legal information and guidance on Kenyan law. This project bridges the knowledge gap between legal systems and citizens by offering a user-friendly interface to ask questions about Kenyan law, legal procedures, and rights.
 
-<img alt="Kenya Law Advisor Screenshot" src="https://imgur.com/undefined">
 
 ## 🌟 Features
 
@@ -106,6 +105,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 📞 Contact
 
-Your Name - your-email@example.com
+Your Name - awstinejessy@example.com
 
-Project Link: https://github.com/yourusername/Kenya-Law-ai
+Project Link: https://github.com/awstine/Kenya-Law-ai
