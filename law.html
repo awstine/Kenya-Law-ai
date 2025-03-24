@@ -3,90 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kenyan Law Advisor</title>
+    <title>Kenyan Law Chatbot</title>
     <link rel="stylesheet" href="law.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <div class="chat-wrapper">
+    <div class="app-container">
+        <!-- Header with logo, welcome message, and logout -->
+        <header>
+            <div class="logo">
+                <div id="welcome-user" class="welcome-message">Welcome to Kenyan Law Chatbot, User!</div>
+            </div>
             <button id="logout-btn">Sign Out</button>
-        <div class="chat-container">
-            <iframe src="https://web.powerva.microsoft.com/environments/Default-84c31ca0-ac3b-4eae-ad11-519d80233e6f/bots/cr5be_kenyanLawAdvisor/webchat?__version__=2"></iframe>
+        </header>
+
+        <main>
+            <!-- Sidebar with chatbot description -->
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <h2>About This Chatbot</h2>
+                </div>
+                <div class="description-container" id="chat-history">
+                    <!-- Chatbot description -->
+                    <div class="chatbot-description">
+                        <p>This AI-powered legal assistant provides information and guidance on Kenyan law.</p>
+                        
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Access to Kenyan legal information</li>
+                            <li>Explanations of legal terms</li>
+                            <li>Guidance on legal procedures</li>
+                            <li>Information about your rights</li>
+                        </ul>
+                        
+                        <h4>How to Use:</h4>
+                        <p>Simply type your legal question in the chat interface and receive instant guidance based on Kenyan law.</p>
+                        
+                        <div class="disclaimer">
+                            <p><strong>Note:</strong> This chatbot provides general information only. For specific legal advice, please consult with a qualified attorney.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main content area - show iframe directly -->
+            <div class="content-area">
+                <!-- Microsoft Bot iframe -->
+                <iframe id="bot-iframe" src="https://web.powerva.microsoft.com/environments/Default-84c31ca0-ac3b-4eae-ad11-519d80233e6f/bots/cr5be_kenyanLawAdvisor/webchat?__version__=2"></iframe>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add this right before the closing </body> tag in law.html -->
+<div id="feedback-button">
+    <button id="open-feedback">Give Feedback</button>
+</div>
+
+<!-- Feedback Modal -->
+<div id="feedback-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>How was your experience?</h2>
+        
+        <div class="rating-container">
+            <div class="stars">
+                <span class="star" data-rating="1">★</span>
+                <span class="star" data-rating="2">★</span>
+                <span class="star" data-rating="3">★</span>
+                <span class="star" data-rating="4">★</span>
+                <span class="star" data-rating="5">★</span>
+            </div>
+            <div class="rating-text">Select your rating</div>
+        </div>
+        
+        <div class="feedback-form">
+            <textarea id="feedback-text" placeholder="Tell us about your experience with Kenya Law Advisor..."></textarea>
+            <button id="submit-feedback" disabled>Submit Feedback</button>
         </div>
     </div>
+</div>
 
     <script src="script1.js"></script>
+    <script src="law.js"></script>
+<script src="feedback-submit.js"></script>
 </body>
 </html>
-
-<!-- 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In Sign Up Form</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    <div class="container">
-        <div class="form-box">
-            <h1 id="title">Sign Up</h1>
-            <form>
-                <div class="input-group">
-                    <div class="input-field" id="nameField">
-                        <i class="fa-solid fa-user"></i>
-                        <input type="text" placeholder="Name">
-
-                    </div>
-
-                    <div class="input-field">
-                        <i class="fa-solid fa-envelope"></i>
-                        <input type="email" placeholder="Email">
-
-                    </div>
-
-                    <div class="input-field">
-                        <i class="fa-solid fa-lock"></i>
-                        <input type="password" placeholder="Password">
-
-                    </div>
-                    <p>Don't know your password <a href="#">Click Here!</a></p>
-
-                </div>
-                <div class="btn-field">
-                <button type="button" id="signupBtn">Sign up</button>
-                <button type="button" id="signinBtn" class="disable">Login</button>
-            </div>
-            </form>
-        </div>
-      
-    </div>
-    <script>
-
-        let signupBtn = document.getElementById("signupBtn");
-        let signinBtn = document.getElementById("signinBtn");
-
-        let nameField = document.getElementById("nameField");
-
-        let title = document.getElementById("title");
-
-
-        signinBtn.onclick = function(){
-            nameField.style.maxHeight = "0";
-            title.innerHTML = "Sign In";
-            signupBtn.classList.add("disable");
-            signinBtn.classList.remove("disable");
-        }
-
-        signupBtn.onclick = function(){
-            nameField.style.maxHeight = "60px";
-            title.innerHTML = "Sign Up";
-            signinBtn.classList.add("disable");
-            signupBtn.classList.remove("disable");
-        }
-
-    </script>
-</body>  
-</html> -->
