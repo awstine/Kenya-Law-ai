@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Dashboard - Kenya Law Advisor</title>
+    <link rel="stylesheet" href="feedback.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header>
+            <div class="header-content">
+                <h1>User Feedback Dashboard</h1>
+                <div class="header-actions">
+                    <select id="filter-rating">
+                        <option value="all">All Ratings</option>
+                        <option value="5">★★★★★ (5 Stars)</option>
+                        <option value="4">★★★★☆ (4 Stars)</option>
+                        <option value="3">★★★☆☆ (3 Stars)</option>
+                        <option value="2">★★☆☆☆ (2 Stars)</option>
+                        <option value="1">★☆☆☆☆ (1 Star)</option>
+                    </select>
+                    <button id="clear-feedback" class="danger-btn">Clear All Feedback</button>
+                    <button id="back-button" class="secondary-btn" onclick="location.href='admin.html'">Back to Admin</button>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <div class="stats-panel">
+                <div class="stat-card">
+                    <h3>Total Feedback</h3>
+                    <div class="stat-value" id="total-count">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Average Rating</h3>
+                    <div class="stat-value" id="average-rating">0.0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>5★ Ratings</h3>
+                    <div class="stat-value" id="five-star-count">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Recent Feedback</h3>
+                    <div class="stat-value" id="recent-count">0</div>
+                </div>
+            </div>
+            
+            <div class="feedback-list" id="feedback-container">
+                <div class="loading">Loading feedback...</div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Debug button hidden at the bottom -->
+    <button id="debug-btn" onclick="alert(checkFeedbackData())" style="position:fixed; bottom:5px; right:5px; font-size:10px; opacity:0.5;">Debug</button>
+    
+    <script src="feedback-display.js"></script>
+</body>
+</html>
