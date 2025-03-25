@@ -22,118 +22,102 @@ const db = getFirestore(app);
 document.addEventListener('DOMContentLoaded', () => {
   console.log("Firebase login script loaded");
   
-  // Get login form and error message element
   const loginForm = document.getElementById('login-form');
   const errorMessage = document.getElementById('error-message');
   
   if (loginForm) {
-    console.log("Login form found");
-    
-    // Show error function
-    const showError = (message) => {
-      if (errorMessage) {
-        errorMessage.textContent = message;
-        errorMessage.style.display = 'block';
-      } else {
-        alert(message); // Fallback if error element doesn't exist
-      }
-    };
-    
-    // Clear error function
-    const clearError = () => {
-      if (errorMessage) {
-        errorMessage.textContent = '';
-        errorMessage.style.display = 'none';
-      }
-    };
-    
-    // Handle form submission
     loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      clearError();
       
-      // Get input values
+      if (errorMessage) {
+        errorMessage.style.display = 'none';
+      }
+      
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
       
-      // Basic validation
       if (!email || !password) {
-        showError('Email and password are required');
+        if (errorMessage) {
+          errorMessage.textContent = 'Email and password are required';
+          errorMessage.style.display = 'block';
+        }
         return;
       }
       
-      // Disable login button
-      const loginButton = document.querySelector('.button input[type="submit"]') || 
-                         document.getElementById('login-button');
-      
+      const loginButton = document.querySelector('input[type="submit"]');
       if (loginButton) {
         loginButton.disabled = true;
         loginButton.value = 'Logging in...';
       }
       
       try {
-        console.log('Attempting to sign in with:', email);
-        
-        // Authenticate with Firebase
+        // Sign in with Firebase Auth
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
         
         console.log('User signed in:', user.uid);
         
         // Get additional user data from Firestore
-        const userDoc = await getDoc(doc(db, "users", user.uid));
-        
-        if (userDoc.exists()) {
-          const userData = userDoc.data();
+        try {
+          const userDoc = await getDoc(doc(db, "users", user.uid));
           
-          // Store user data in localStorage
-          localStorage.setItem('user', JSON.stringify({
+          let userData = {
             uid: user.uid,
             email: user.email,
-            username: userData.username,
-            name: userData.name,
             isLoggedIn: true
-          }));
+          };
           
-          console.log('User data stored in localStorage');
+          if (userDoc.exists()) {
+            // Add Firestore data
+            userData = {
+              ...userData,
+              name: userDoc.data().name,
+              username: userDoc.data().username
+            };
+          }
           
-          // Redirect to the main application
+          // Store user info in localStorage
+          localStorage.setItem('user', JSON.stringify(userData));
+          
+          // Redirect to main app
           window.location.href = 'law.html';
-        } else {
-          console.warn('User document not found in Firestore');
+        } catch (firestoreError) {
+          console.error('Error getting user data:', firestoreError);
           
-          // Still store minimal user data
+          // Still store minimal user data and proceed
           localStorage.setItem('user', JSON.stringify({
             uid: user.uid,
             email: user.email,
             isLoggedIn: true
           }));
           
-          // Redirect to the main application
           window.location.href = 'law.html';
         }
       } catch (error) {
         console.error('Login error:', error);
         
-        // Handle specific Firebase errors
-        switch(error.code) {
-          case 'auth/invalid-email':
-            showError('Invalid email format');
-            break;
-          case 'auth/user-disabled':
-            showError('This account has been disabled');
-            break;
-          case 'auth/user-not-found':
-            showError('No account found with this email');
-            break;
-          case 'auth/wrong-password':
-            showError('Incorrect password');
-            break;
-          default:
-            showError(`Login failed: ${error.message}`);
+        if (errorMessage) {
+          // Handle specific Firebase errors
+          switch(error.code) {
+            case 'auth/invalid-email':
+              errorMessage.textContent = 'Invalid email format';
+              break;
+            case 'auth/user-disabled':
+              errorMessage.textContent = 'This account has been disabled';
+              break;
+            case 'auth/user-not-found':
+              errorMessage.textContent = 'No account found with this email';
+              break;
+            case 'auth/wrong-password':
+              errorMessage.textContent = 'Incorrect password';
+              break;
+            default:
+              errorMessage.textContent = `Login failed: ${error.message}`;
+          }
+          
+          errorMessage.style.display = 'block';
         }
       } finally {
-        // Re-enable login button
         if (loginButton) {
           loginButton.disabled = false;
           loginButton.value = 'Login';
