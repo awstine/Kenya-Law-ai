@@ -83,86 +83,9 @@
     </div>
 </div>
 
-<!-- <script type="module">
-    // Import Firebase auth
-    import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-  
-    // Your Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyAoQEyfcaUTYwYsZXcKtaYYYtk7dBapHeA",
-      authDomain: "kenya-law-chatbot.firebaseapp.com",
-      projectId: "kenya-law-chatbot",
-      storageBucket: "kenya-law-chatbot.firebasestorage.app",
-      messagingSenderId: "1071459759295",
-      appId: "1:1071459759295:web:b2e6c1348dc917865a420a",
-      measurementId: "G-ZYSC5K2CKZ"
-    };
-  
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-  
-    // Set up logout functionality
-    document.addEventListener('DOMContentLoaded', () => {
-      const logoutBtn = document.getElementById('logout-btn');
-      
-      if (logoutBtn) {
-        logoutBtn.addEventListener('click', async () => {
-          try {
-            // Sign out from Firebase
-            await signOut(auth);
-            
-            // Clear local user data
-            localStorage.removeItem('user');
-            
-            // Redirect to login page
-            window.location.href = 'login.html';
-          } catch (error) {
-            console.error('Error signing out:', error);
-            alert('Failed to sign out. Please try again.');
-          }
-        });
-      }
-    });
-  </script>
-
-<script>
-    // Check if user is logged in
-    document.addEventListener('DOMContentLoaded', () => {
-      const userData = localStorage.getItem('user');
-      
-      if (!userData) {
-        // Not logged in, redirect to login page
-        window.location.href = 'login.html';
-        return;
-      }
-      
-      try {
-        const user = JSON.parse(userData);
-        
-        if (!user.isLoggedIn) {
-          // User data exists but not logged in
-          window.location.href = 'login.html';
-          return;
-        }
-        
-        // User is logged in, update welcome message if needed
-        const welcomeUser = document.getElementById('welcome-user');
-        if (welcomeUser && user.name) {
-          welcomeUser.textContent = `Welcome to Kenyan Law Chatbot, ${user.name}!`;
-        } else if (welcomeUser && user.username) {
-          welcomeUser.textContent = `Welcome to Kenyan Law Chatbot, ${user.username}!`;
-        }
-      } catch (error) {
-        console.error('Error checking authentication:', error);
-        window.location.href = 'login.html';
-      }
-    });
-  </script> -->
 
     <script src="script1.js"></script>
     <script src="law.js"></script>
-<script src="feedback-submit.js"></script>
+    <script type="module" src="firebase-feedback.js"></script>
 </body>
 </html>

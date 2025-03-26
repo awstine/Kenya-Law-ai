@@ -21,7 +21,6 @@
                         <option value="2">★★☆☆☆ (2 Stars)</option>
                         <option value="1">★☆☆☆☆ (1 Star)</option>
                     </select>
-                    <button id="clear-feedback" class="danger-btn">Clear All Feedback</button>
                     <button id="back-button" class="secondary-btn" onclick="location.href='admin.html'">Back to Admin</button>
                 </div>
             </div>
@@ -54,8 +53,24 @@
     </div>
     
     <!-- Debug button hidden at the bottom -->
-    <button id="debug-btn" onclick="alert(checkFeedbackData())" style="position:fixed; bottom:5px; right:5px; font-size:10px; opacity:0.5;">Debug</button>
+    <button id="debug-btn" onclick="debugStorage()" style="position:fixed; bottom:5px; right:5px; font-size:10px; opacity:0.5;">Debug</button>
     
-    <script src="feedback-display.js"></script>
+    <script>
+    function debugStorage() {
+        console.log("LocalStorage Feedback:", JSON.parse(localStorage.getItem('user_feedback') || '[]'));
+        alert("Check console for debug info");
+    }
+    </script>
+    
+    <script type="module" src="firebase-feedback.js"></script>
 </body>
 </html>
+
+<!-- rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+} -->
